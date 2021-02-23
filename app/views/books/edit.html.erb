@@ -1,0 +1,22 @@
+<div class="notifications">
+ <%= flash[:notice] %>
+</div>
+<%= form_with model: @book, local:true do |f| %>
+<% if @book.errors.any? %>
+    <h3>There are <%= @book.errors.count %>ea errors in the entered contents.</h3>
+    <ul>
+      <% @book.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+<% end %>
+
+<h1>Editing Book</h1>
+<p>title</p>
+<%= f.text_field :title %>
+<p>Opinion</p>
+<%= f.text_area :body %><br>
+<%= f.submit 'Update Book', class:"btn btn-success" %><br>
+<%= link_to "Show", book_path(@book) %> |
+<%= link_to "Back", books_path %>
+<% end %>

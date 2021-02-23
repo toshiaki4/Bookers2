@@ -1,0 +1,43 @@
+<% if @book.errors.any? %>
+    <h3>There are <%= @book.errors.count %>ea errors in the entered contents.</h3>
+    <ul>
+      <% @book.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  <% end %>
+
+<h2>User info</h2>
+<table class='table'>
+      <tr>
+        <%= attachment_image_tag user, :profile_image, fallback: "no_image.jpg", format: 'jpeg', size: "40x40"  %>
+      </tr>
+      <tr>
+       <th>name</th>
+       <th><%= user.name %></th>
+      </tr>
+      <tr>
+        <th>introduction</th>
+        <th><%= user.introduction %></th>
+      </tr>
+</table>
+        <div class='row'>
+          <%= link_to "", edit_user_path(user), class:"btn btn-outline-secondary btn-block fas fa-user-cog edit_user_21212"%>
+        </div>
+
+
+
+
+<h1>New book</h1>
+<!-- form_with部分 -->
+<%= form_with model: Book.new, local:true do |f| %>
+
+  <p>Title</p>
+  <%= f.text_field :title %>
+
+  <p>Opinion</p>
+  <%= f.text_area :body %><br>
+  <div class="form-group">
+  <%= f.submit 'Create Book', class:"btn btn-sm btn-success" %>
+  </div>
+<% end %>
